@@ -29,16 +29,16 @@ RUN apt-get -y install nginx
 RUN add-apt-repository -y ppa:ondrej/php && apt-get update
 
 #Installing PHP and extensions
-RUN apt-get -y install php7.4 php7.4-redis php7.4-fpm php7.4-common php7.4-curl  \
-php7.4-dev php7.4-mbstring php7.4-gd php7.4-json php7.4-redis php7.4-xml php7.4-zip php7.4-intl php7.4-mysql
+RUN apt-get -y install php7.2 php7.2-redis php7.2-fpm php7.2-common php7.2-curl  \
+php7.2-dev php7.2-mbstring php7.2-gd php7.2-json php7.2-redis php7.2-xml php7.2-zip php7.2-intl php7.2-mysql
 
 
 # Install xdebug and redis
 RUN pecl install xdebug redis
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/7.4/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/7.4/cli/php.ini
+RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/7.2/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/7.2/cli/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -59,4 +59,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD service php7.4-fpm start && nginx -g "daemon off;"
+CMD service php7.2-fpm start && nginx -g "daemon off;"
