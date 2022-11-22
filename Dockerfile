@@ -42,8 +42,8 @@ php8.1-dev php8.1-mbstring php8.1-gd php8.1-redis php8.1-xml php8.1-zip php8.1-i
 RUN apt-get install php-xdebug -y && apt install php-redis -y
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/8.1/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/8.1/cli/php.ini
+RUN echo "zend_extension=/usr/lib/php/20210902/xdebug.so" >> /etc/php/8.1/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20210902/xdebug.so" >> /etc/php/8.1/cli/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
