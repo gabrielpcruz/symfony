@@ -25,6 +25,9 @@ RUN apt-get -y install \
 #Installing NGINX
 RUN apt-get -y install nginx
 
+#
+COPY default /etc/nginx/sites-enabled/default
+
 ##Adding PHP repository
 RUN add-apt-repository ppa:ondrej/php -y && apt-get update
 
@@ -47,12 +50,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install wget
 RUN apt install wget -y
-
-# Install Symfony
-RUN wget https://get.symfony.com/cli/installer -O - | bash
-
-# Put Symfony in Path variable
-RUN export PATH="$HOME/.symfony/bin:$PATH"
 
 # Clean up
 RUN rm -rf /tmp/pear \
