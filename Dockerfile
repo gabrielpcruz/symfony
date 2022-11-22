@@ -40,8 +40,8 @@ php7.2-dev php7.2-mbstring php7.2-gd php7.2-json php7.2-redis php7.2-xml php7.2-
 RUN pecl install xdebug redis
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/7.2/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/7.2/cli/php.ini
+RUN echo "zend_extension=/usr/lib/php/20170718/xdebug.so" >> /etc/php/7.2/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20170718/xdebug.so" >> /etc/php/7.2/cli/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
