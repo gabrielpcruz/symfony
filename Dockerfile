@@ -58,4 +58,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD systemctl restart nginx && nginx -g "daemon off;"
+CMD service php8.0-fpm start && nginx -g "daemon off;"
