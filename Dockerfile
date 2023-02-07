@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 #Updating operating system
-RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
+RUN apt-get update && apt-get -y upgrade
 
 ##Installing essential packages
 RUN apt-get -y install \
@@ -31,19 +31,19 @@ COPY default /etc/nginx/sites-enabled/default
 ##Adding PHP repository
 RUN add-apt-repository ppa:ondrej/php -y && apt-get update
 
-RUN apt install php8.1-fpm -y
+RUN apt install php8.2-fpm -y
 
 #Installing PHP and extensions
-RUN apt-get -y install php8.1 php8.1-redis php8.1-fpm php8.1-common php8.1-curl  \
-php8.1-dev php8.1-mbstring php8.1-gd php8.1-redis php8.1-xml php8.1-zip php8.1-intl php8.1-mysql
+RUN apt-get -y  install php8.2 php8.2- \
+    redis php8.2-fpm php8.2-common php8.2-curl  \
+php8.2-dev php8.2-mbstring php8.2-gd php8.2-redis php8.2-xml php8.2-zip php8.2-intl php8.2-mysql --allow-change-held-packages
 
 
 # Install xdebug and redis
 RUN apt-get install php-xdebug -y && apt install php-redis -y
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20210902/xdebug.so" >> /etc/php/8.1/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20210902/xdebug.so" >> /etc/php/8.1/cli/php.ini
+RUN echo "zend_extension=/usr/lib/php/20220829/xdebug.so" >> /etc/php/8.2/fpm/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -58,4 +58,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD service php8.1-fpm start && nginx -g "daemon off;"
+CMD service php8.2-fpm start && nginx -g "daemon off;"
