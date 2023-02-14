@@ -40,7 +40,7 @@ php7.0-dev php7.0-mbstring php7.0-gd php7.0-json php7.0-redis php7.0-xml php7.0-
 RUN apt-get install -y php7.0-xdebug php7.0-redis
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20160303/xdebug.so" >> /etc/php/7.0/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20151012/xdebug.so" >> /etc/php/7.0/fpm/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
