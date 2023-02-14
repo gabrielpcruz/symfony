@@ -41,7 +41,6 @@ RUN apt-get install -y php7.1-xdebug php7.1-redis
 
 #Configuring Xdebug
 RUN echo "zend_extension=/usr/lib/php/20160303/xdebug.so" >> /etc/php/7.1/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20160303/xdebug.so" >> /etc/php/7.1/cli/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
