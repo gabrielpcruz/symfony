@@ -32,15 +32,15 @@ COPY default /etc/nginx/sites-enabled/default
 RUN add-apt-repository -y ppa:ondrej/php && apt-get update
 
 #Installing PHP and extensions
-RUN apt-get -y install php7.1 php7.1-redis php7.1-fpm php7.1-common php7.1-curl  \
-php7.1-dev php7.1-mbstring php7.1-gd php7.1-json php7.1-redis php7.1-xml php7.1-zip php7.1-intl php7.1-mysql
+RUN apt-get -y install php7.0 php7.0-redis php7.0-fpm php7.0-common php7.0-curl  \
+php7.0-dev php7.0-mbstring php7.0-gd php7.0-json php7.0-redis php7.0-xml php7.0-zip php7.0-intl php7.0-mysql
 
 
 # Install xdebug and redis
-RUN apt-get install -y php7.1-xdebug php7.1-redis
+RUN apt-get install -y php7.0-xdebug php7.0-redis
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20160303/xdebug.so" >> /etc/php/7.1/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20160303/xdebug.so" >> /etc/php/7.0/fpm/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -55,4 +55,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD service php7.1-fpm start && nginx -g "daemon off;"
+CMD service php7.0-fpm start && nginx -g "daemon off;"
