@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 #Sem interação humana
 ARG DEBIAN_FRONTEND=noninteractive
@@ -32,15 +32,15 @@ COPY default /etc/nginx/sites-enabled/default
 RUN add-apt-repository -y ppa:ondrej/php && apt-get update
 
 #Installing PHP and extensions
-RUN apt-get -y install php5.6 php5.6-redis php5.6-fpm php5.6-common php5.6-curl  \
-php5.6-dev php5.6-mbstring php5.6-gd php5.6-json php5.6-redis php5.6-xml php5.6-zip php5.6-intl php5.6-mysql
+RUN apt-get -y install php5.5 php5.5-redis php5.5-fpm php5.5-common php5.5-curl  \
+php5.5-dev php5.5-mbstring php5.5-gd php5.5-json php5.5-redis php5.5-xml php5.5-zip php5.5-intl php5.5-mysql
 
 
 # Install xdebug and redis
-RUN apt-get install -y php5.6-xdebug php5.6-redis
+RUN apt-get install -y php5.5-xdebug php5.5-redis
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20131226/xdebug.so" >> /etc/php/5.6/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20131226/xdebug.so" >> /etc/php/5.5/fpm/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -55,4 +55,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD service php5.6-fpm start && nginx -g "daemon off;"
+CMD service php5.5-fpm start && nginx -g "daemon off;"
