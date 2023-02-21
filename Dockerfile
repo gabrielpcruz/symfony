@@ -6,6 +6,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 #Updating operating system
 RUN apt-get update && apt-get -y upgrade
 
+RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null
+
 ##Installing essential packages
 RUN apt-get -y install \
                apt-utils \
