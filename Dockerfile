@@ -1,10 +1,13 @@
 FROM ubuntu:20.04
 
+ARG PHP_VERSION=7.0
+ARG XDEBUG_YEAR=20170718
+
 #Sem interação humana
 ARG DEBIAN_FRONTEND=noninteractive
 
 #Updating operating system
-RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
+RUN apt-get update && apt-get -y upgrade
 
 ##Installing essential packages
 RUN apt-get -y install \
@@ -29,18 +32,21 @@ RUN apt-get -y install nginx
 COPY default /etc/nginx/sites-enabled/default
 
 ##Adding PHP repository
-RUN add-apt-repository -y ppa:ondrej/php && apt-get update
+RUN add-apt-repository ppa:ondrej/php -y && apt-get update -y
+
+RUN apt install php$PHP_VERSION-fpm -y
+
+RUN update-alternatives --set php /usr/bin/php$PHP_VERSION
 
 #Installing PHP and extensions
-RUN apt-get -y install php7.0 php7.0-redis php7.0-fpm php7.0-common php7.0-curl  \
-php7.0-dev php7.0-mbstring php7.0-gd php7.0-json php7.0-redis php7.0-xml php7.0-zip php7.0-intl php7.0-mysql
-
+RUN apt-get -y install php$PHP_VERSION-redis php$PHP_VERSION-common php$PHP_VERSION-curl  \
+php$PHP_VERSION-dev php$PHP_VERSION-mbstring php$PHP_VERSION-gd php$PHP_VERSION-redis php$PHP_VERSION-xml php$PHP_VERSION-zip php$PHP_VERSION-intl php$PHP_VERSION-mysql
 
 # Install xdebug and redis
-RUN apt-get install -y php7.0-xdebug php7.0-redis
+RUN apt-get install php$PHP_VERSION-xdebug -y && apt install php$PHP_VERSION-redis -y
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20151012/xdebug.so" >> /etc/php/7.0/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/$XDEBUG_YEAR/xdebug.so" >> /etc/php/$PHP_VERSION/fpm/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
