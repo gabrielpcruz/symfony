@@ -2,6 +2,7 @@ FROM ubuntu:20.04
 
 ARG PHP_VERSION=7.4
 ARG XDEBUG_YEAR=20190902
+ARG COMPOSER_VERSION=2.5.4
 
 #Sem interação humana
 ARG DEBIAN_FRONTEND=noninteractive
@@ -49,7 +50,7 @@ RUN apt-get install php$PHP_VERSION-xdebug -y && apt install php$PHP_VERSION-red
 RUN echo "zend_extension=/usr/lib/php/$XDEBUG_YEAR/xdebug.so" >> /etc/php/$PHP_VERSION/fpm/php.ini
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl --insecure https://getcomposer.org/download/$COMPOSER_VERSION/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 
 # Install wget
 RUN apt install wget -y
