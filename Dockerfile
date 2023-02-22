@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 #Updating operating system
-RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
+RUN apt-get update && apt-get -y upgrade
 
 ##Installing essential packages
 RUN apt-get -y install \
