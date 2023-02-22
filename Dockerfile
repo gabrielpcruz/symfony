@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 #Updating operating system
-RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
+RUN apt-get update && apt-get -y upgrade
 
 ##Installing essential packages
 RUN apt-get -y install \
@@ -29,7 +29,7 @@ RUN apt-get -y install nginx
 COPY default /etc/nginx/sites-enabled/default
 
 ##Adding PHP repository
-RUN add-apt-repository ppa:ondrej/php -y && apt-get update
+RUN add-apt-repository ppa:ondrej/php -y && apt-get update -y
 
 RUN apt install php8.0-fpm -y
 
