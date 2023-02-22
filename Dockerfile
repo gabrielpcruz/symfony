@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
-ARG PHP_VERSION=7.4
-ARG XDEBUG_YEAR=20190902
+ARG PHP_VERSION=7.3
+ARG XDEBUG_YEAR=20180731
 
 #Sem interação humana
 ARG DEBIAN_FRONTEND=noninteractive
@@ -61,4 +61,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD service php7.4-fpm start && nginx -g "daemon off;"
+CMD service php7.3-fpm start && nginx -g "daemon off;"
