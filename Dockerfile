@@ -33,17 +33,17 @@ RUN add-apt-repository ppa:ondrej/php -y && apt-get update
 
 RUN apt install php8.0-fpm -y
 
+RUN update-alternatives --set php /usr/bin/php8.0
+
 #Installing PHP and extensions
-RUN apt-get -y install php8.0 php8.0-redis php8.0-fpm php8.0-common php8.0-curl  \
+RUN apt-get -y install php8.0-redis php8.0-fpm php8.0-common php8.0-curl  \
 php8.0-dev php8.0-mbstring php8.0-gd php8.0-redis php8.0-xml php8.0-zip php8.0-intl php8.0-mysql
 
-
 # Install xdebug and redis
-RUN apt-get install php-xdebug -y && apt install php-redis -y
+RUN apt-get install php8.0-xdebug -y && apt install php8.0-redis -y
 
 #Configuring Xdebug
 RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/8.0/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" >> /etc/php/8.0/cli/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
