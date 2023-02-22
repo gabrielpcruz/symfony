@@ -1,5 +1,8 @@
 FROM ubuntu:20.04
 
+ARG PHP_VERSION=8.0
+ARG XDEBUG_YEAR=20200930
+
 #Sem interação humana
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -31,19 +34,19 @@ COPY default /etc/nginx/sites-enabled/default
 ##Adding PHP repository
 RUN add-apt-repository ppa:ondrej/php -y && apt-get update -y
 
-RUN apt install php8.0-fpm -y
+RUN apt install php$PHP_VERSION-fpm -y
 
-RUN update-alternatives --set php /usr/bin/php8.0
+RUN update-alternatives --set php /usr/bin/php$PHP_VERSION
 
 #Installing PHP and extensions
-RUN apt-get -y install php8.0-redis php8.0-fpm php8.0-common php8.0-curl  \
-php8.0-dev php8.0-mbstring php8.0-gd php8.0-redis php8.0-xml php8.0-zip php8.0-intl php8.0-mysql
+RUN apt-get -y install php$PHP_VERSION-redis php$PHP_VERSION-common php$PHP_VERSION-curl  \
+php$PHP_VERSION-dev php$PHP_VERSION-mbstring php$PHP_VERSION-gd php$PHP_VERSION-redis php$PHP_VERSION-xml php$PHP_VERSION-zip php$PHP_VERSION-intl php$PHP_VERSION-mysql
 
 # Install xdebug and redis
-RUN apt-get install php8.0-xdebug -y && apt install php8.0-redis -y
+RUN apt-get install php$PHP_VERSION-xdebug -y && apt install php$PHP_VERSION-redis -y
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20200930/xdebug.so" >> /etc/php/8.0/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/$XDEBUG_YEAR/xdebug.so" >> /etc/php/$PHP_VERSION/fpm/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
