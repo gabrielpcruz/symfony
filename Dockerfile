@@ -8,7 +8,7 @@ ARG COMPOSER_VERSION=2.2.9
 ARG DEBIAN_FRONTEND=noninteractive
 
 #Updating operating system
-RUN apt-get update && apt-get -y upgrade
+RUN apt-get update -y
 
 ##Installing essential packages
 RUN apt-get -y install \
