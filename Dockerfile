@@ -1,8 +1,8 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-ARG PHP_VERSION=8.2
-ARG XDEBUG_YEAR=20220829
-ARG COMPOSER_VERSION=2.5.4
+ARG PHP_VERSION=8.3
+ARG XDEBUG_YEAR=20230831
+ARG COMPOSER_VERSION=2.7.1
 
 #Sem interação humana
 ARG DEBIAN_FRONTEND=noninteractive
@@ -62,4 +62,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD service php8.2-fpm start && nginx -g "daemon off;"
+CMD service php8.3-fpm start && nginx -g "daemon off;"
