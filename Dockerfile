@@ -67,4 +67,6 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
+WORKDIR /var/www/html
+
 CMD service php8.3-fpm start && nginx -g "daemon off;"
