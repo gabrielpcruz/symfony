@@ -15,11 +15,16 @@ RUN apt-get -y install \
                apt-utils \
                software-properties-common \
                curl \
+               sudo \
+               bash \
                bash-completion \
+               openssh-server \
+               apt-utils \
                vim \
                git \
                zip \
                unzip \
+               cron \
                libmagickwand-dev \
                libzip-dev \
                libpng-dev \
